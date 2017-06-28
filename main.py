@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome import service
 from selenium.webdriver.common.keys import Keys
 from time import sleep
-import threading
+import os
 '''Большое количество запросов кидает в блок'''
 
 '''Класс драйвера и методов'''
@@ -24,15 +24,14 @@ william, corvette, jackson, tigger, computer')
     def __init__(self,url,login):
             self.urls = url
             self.login = login
-        
+            self.path = os.getcwd()
+            
     def PasswordChekers(self):
-        super
         keys = Driver.keys.split(', ')
-        print (keys)
         
         for i in keys:
             for j in range(0,len(keys)):
-                if j%2 == 0:
+                if j%2 != 0:
                     driver = webdriver.Chrome()
                     driver.get(self.urls)
                     elem = driver.find_element_by_id("edit-name")
@@ -44,10 +43,10 @@ william, corvette, jackson, tigger, computer')
                     sleep(1)
                     driver.close()
                 else:
-                    webdriver_service = service.Service()
+                    webdriver_service = service.Service(self.path)
                     webdriver_service.start()
                     driver = webdriver.Remote(webdriver_service.service_url, webdriver.DesiredCapabilities.OPERA)
-                    driver.get(self.url)
+                    driver.get(self.urls)
                     elem = driver.find_element_by_id("edit-name")
                     elem.send_keys(self.login)
                     elem_2 = driver.find_element_by_id("edit-pass")
@@ -59,5 +58,5 @@ william, corvette, jackson, tigger, computer')
         assert "No results found." not in driver.page_source
     
 
-instance = Driver('url','admin')
+instance = Driver('https://google.com','admin')
 instance.PasswordChekers()
