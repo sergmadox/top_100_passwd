@@ -6,4 +6,4 @@
 Тест при переборе 100 паролей будет на каждую итерацию менять браузер, для маскировки под NAT.
 
 
-Для запуска нужен selenium и chromedriver/FireFox.
+Для запуска нужен selenium и chromedriver/Opera.
