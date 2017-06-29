@@ -37,11 +37,8 @@ william, corvette, jackson, tigger, computer')
             
     def PasswordChekers(self):
         keys = CheckPassForm.keys.split(', ')
-        print (self.urls)
-        print (self.login)
-        print (self.path + '\\geckodriver.exe')
         for i in keys:
-            for j in range(0,len(keys)):
+            for j in range(0, len(keys)):
                 if j%2 == 0:
                     driver = webdriver.Chrome()
                     driver.get(self.urls)
@@ -75,7 +72,7 @@ if __name__ == "__main__":
         instance = CheckPassForm('http://' + data.url,data.login)
         instance.PasswordChekers()
     except TypeError:
-        print ("=" * 47)
-        print ("TOP-100 passdw script whitout keys does't work \n\t try and watch> python main.py -h")
-        print ("=" * 47)
+        print ("=" * 50)
+        print ("| TOP-100 passdw script does't work whitout keys | \n| \t try and watch> python main.py -h\t | ")
+        print ("=" * 50)
         print ("email:sergmadox@gmail.com")
