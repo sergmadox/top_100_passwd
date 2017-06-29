@@ -68,10 +68,14 @@ william, corvette, jackson, tigger, computer')
     
 
 if __name__ == "__main__":
+    try:
+        parser = createParser()
+        data = parser.parse_args()
     
-    
-    parser = createParser()
-    data = parser.parse_args()
-    
-    instance = CheckPassForm('http://' + data.url,data.login)
-    instance.PasswordChekers()
+        instance = CheckPassForm('http://' + data.url,data.login)
+        instance.PasswordChekers()
+    except TypeError:
+        print ("=" * 47)
+        print ("TOP-100 passdw script whitout keys does't work \n\t try and watch> python main.py -h")
+        print ("=" * 47)
+        print ("email:sergmadox@gmail.com")
