@@ -42,7 +42,7 @@ william, corvette, jackson, tigger, computer')
         print (self.path + '\\geckodriver.exe')
         for i in keys:
             for j in range(0,len(keys)):
-                if j%2 != 0:
+                if j%2 == 0:
                     driver = webdriver.Chrome()
                     driver.get(self.urls)
                     elem = driver.find_element_by_id("edit-name")
