@@ -34,33 +34,30 @@ william, corvette, jackson, tigger, computer')
             self.urls = url
             self.login = login
             self.path = os.getcwd()
-            
+    
+    def ChooseDriver(drivername):
+        if drivername == 'Chrome':
+            driver = webdriver.Chrome()
+        else:
+            driver = webdriver.Firefox(executable_path=self.path+'\\geckodriver.exe',capabilities = webdriver.DesiredCapabilities().FIREFOX)
+        driver.get(self.urls)
+        elem = driver.find_element_by_id("edit-name")
+        elem.send_keys(self.login)
+        elem_2 = driver.find_element_by_id("edit-pass")
+        elem_2.send_keys(i)
+        result = driver.find_element_by_xpath("//*[@id='edit-submit']")
+        result.click()
+        sleep(900)
+        driver.close()       
+    
     def PasswordChekers(self):
         keys = CheckPassForm.keys.split(', ')
         for i in keys:
             for j in range(0, len(keys)):
                 if j%2 == 0:
-                    driver = webdriver.Chrome()
-                    driver.get(self.urls)
-                    elem = driver.find_element_by_id("edit-name")
-                    elem.send_keys(self.login)
-                    elem_2 = driver.find_element_by_id("edit-pass")
-                    elem_2.send_keys(i)
-                    result = driver.find_element_by_xpath("//*[@id='edit-submit']")
-                    result.click()
-                    sleep(900)
-                    driver.close()
+                    CheckPassForm.ChooseDriver('Chrome')                      
                 else:
-                    driver = webdriver.Firefox(executable_path=self.path+'\\geckodriver.exe',capabilities = webdriver.DesiredCapabilities().FIREFOX)
-                    driver.get(self.urls)
-                    elem = driver.find_element_by_id("edit-name")
-                    elem.send_keys(self.login)
-                    elem_2 = driver.find_element_by_id("edit-pass")
-                    elem_2.send_keys(i)
-                    result = driver.find_element_by_xpath("//*[@id='edit-submit']")
-                    result.click()
-                    sleep(900)
-                    driver.close()
+                    CheckPassForm.ChooseDriver('Firefox') 
         assert "No results found." not in driver.page_source
     
 
