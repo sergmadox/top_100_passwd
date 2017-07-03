@@ -6,6 +6,9 @@ from time import sleep
 import os
 import sys
 import argparse
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+
 '''Большое количество запросов кидает в блок'''
  
 def createParser ():
@@ -35,14 +38,19 @@ william, corvette, jackson, tigger, computer')
             self.login = login
             self.path = os.getcwd()
     
-    def ChooseDriver(drivername):
+    def ChooseDriver (drivername,urls,login):
+        
         if drivername == 'Chrome':
             driver = webdriver.Chrome()
         else:
-            driver = webdriver.Firefox(executable_path=self.path+'\\geckodriver.exe',capabilities = webdriver.DesiredCapabilities().FIREFOX)
-        driver.get(self.urls)
+            fx_capabilities = DesiredCapabilities.FIREFOX
+            fx_capabilities['marionette'] = True
+            fx_capabilities['binary'] = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+            driver = webdriver.Firefox(capabilities = fx_capabilities)
+        
+        driver.get(urls)
         elem = driver.find_element_by_id("edit-name")
-        elem.send_keys(self.login)
+        elem.send_keys(login)
         elem_2 = driver.find_element_by_id("edit-pass")
         elem_2.send_keys(i)
         result = driver.find_element_by_xpath("//*[@id='edit-submit']")
@@ -55,9 +63,9 @@ william, corvette, jackson, tigger, computer')
         for i in keys:
             for j in range(0, len(keys)):
                 if j%2 == 0:
-                    CheckPassForm.ChooseDriver('Chrome')                      
+                    CheckPassForm.ChooseDriver('Chrome',self.urls, self.login)                      
                 else:
-                    CheckPassForm.ChooseDriver('Firefox') 
+                    CheckPassForm.ChooseDriver('Firefox',self.urls, self.login)
         assert "No results found." not in driver.page_source
     
 
