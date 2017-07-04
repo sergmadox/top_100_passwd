@@ -45,7 +45,7 @@ william, corvette, jackson, tigger, computer')
             binary = FirefoxBinary (r'C:\\Program Files\\Mozilla Firefox\\firefox.exe')
             fx_capabilities = DesiredCapabilities.FIREFOX.copy()
             fx_capabilities['marionette'] = True
-            driver = webdriver.Firefox(firefox_binary=binary,capabilities=fx_capabilities, executable_path='D:\\git_dir\\top_100_passwd\\geckodriver')
+            driver = webdriver.Firefox(firefox_binary=binary,capabilities=fx_capabilities)
         
         driver.get(urls)
         elem = driver.find_element_by_id("edit-name")
