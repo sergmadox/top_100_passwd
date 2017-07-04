@@ -36,7 +36,6 @@ william, corvette, jackson, tigger, computer')
     def __init__(self,url,login):
             self.urls = url
             self.login = login
-            self.path = os.getcwd()
     
     def ChooseDriver (drivername,urls,login,passwd):
         
@@ -55,7 +54,7 @@ william, corvette, jackson, tigger, computer')
         elem_2.send_keys(passwd)
         result = driver.find_element_by_xpath("//*[@id='edit-submit']")
         result.click()
-        #sleep(900)
+        sleep(900)
         driver.close()       
     
     def PasswordChekers(self):
@@ -65,7 +64,7 @@ william, corvette, jackson, tigger, computer')
                 if j%2 == 0:
                     CheckPassForm.ChooseDriver('Chrome',self.urls, self.login,i)                      
                 else:
-                    CheckPassForm.ChooseDriver('Firefox',self.urls, self.login)
+                    CheckPassForm.ChooseDriver('Firefox',self.urls, self.login,i)
         assert "No results found." not in driver.page_source
     
 
