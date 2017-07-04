@@ -69,13 +69,13 @@ william, corvette, jackson, tigger, computer')
     
 
 if __name__ == "__main__":
-   # try:
+    try:
         parser = createParser()
         data = parser.parse_args()
     
         instance = CheckPassForm('http://' + data.url,data.login)
         instance.PasswordChekers()
-    #except TypeError:
+    except TypeError:
         print ("=" * 50)
         print ("| TOP-100 passdw script does't work whitout keys | \n| \t try and watch> python main.py -h\t | ")
         print ("=" * 50)
