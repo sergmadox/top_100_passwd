@@ -38,24 +38,24 @@ william, corvette, jackson, tigger, computer')
             self.login = login
             self.path = os.getcwd()
     
-    def ChooseDriver (drivername,urls,login):
+    def ChooseDriver (drivername,urls,login,passwd):
         
         if drivername == 'Chrome':
             driver = webdriver.Chrome()
         else:
-            fx_capabilities = DesiredCapabilities.FIREFOX
+            binary = FirefoxBinary (r'C:\\Program Files\\Mozilla Firefox\\firefox.exe')
+            fx_capabilities = DesiredCapabilities.FIREFOX.copy()
             fx_capabilities['marionette'] = True
-            fx_capabilities['binary'] = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
-            driver = webdriver.Firefox(capabilities = fx_capabilities)
+            driver = webdriver.Firefox(firefox_binary=binary,capabilities=fx_capabilities, executable_path='D:\\git_dir\\top_100_passwd\\geckodriver')
         
         driver.get(urls)
         elem = driver.find_element_by_id("edit-name")
         elem.send_keys(login)
         elem_2 = driver.find_element_by_id("edit-pass")
-        elem_2.send_keys(i)
+        elem_2.send_keys(passwd)
         result = driver.find_element_by_xpath("//*[@id='edit-submit']")
         result.click()
-        sleep(900)
+        #sleep(900)
         driver.close()       
     
     def PasswordChekers(self):
@@ -63,20 +63,20 @@ william, corvette, jackson, tigger, computer')
         for i in keys:
             for j in range(0, len(keys)):
                 if j%2 == 0:
-                    CheckPassForm.ChooseDriver('Chrome',self.urls, self.login)                      
+                    CheckPassForm.ChooseDriver('Chrome',self.urls, self.login,i)                      
                 else:
                     CheckPassForm.ChooseDriver('Firefox',self.urls, self.login)
         assert "No results found." not in driver.page_source
     
 
 if __name__ == "__main__":
-    try:
+   # try:
         parser = createParser()
         data = parser.parse_args()
     
         instance = CheckPassForm('http://' + data.url,data.login)
         instance.PasswordChekers()
-    except TypeError:
+    #except TypeError:
         print ("=" * 50)
         print ("| TOP-100 passdw script does't work whitout keys | \n| \t try and watch> python main.py -h\t | ")
         print ("=" * 50)
